@@ -4,7 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-const Joi = require('joi');
+const Joi = require("@hapi/joi");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -16,7 +16,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-function devTeamPrompt() {
+// function devTeamPrompt() {
     return inquirer.prompt([
         {
             message: "What is the name of the Employee?",
@@ -80,7 +80,7 @@ function devTeamPrompt() {
             when: function (answers) {answers.role === "Intern"}
         }
     ]);
-}
+// }
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -101,5 +101,3 @@ function devTeamPrompt() {
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work!```
-
-init ();
