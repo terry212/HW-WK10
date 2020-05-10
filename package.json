@@ -19,8 +19,9 @@
   "bugs": {
     "url": "https://github.com/terry212/HW-WK10/issues"
   },
-  "homepage": "https://github.com/terry212/HW-WK10#readme",
+  "homepage": "https://github.com/terry212/HW-WK10",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "inquirer": "^6.3.1"
   },
   "devDependencies": {
