@@ -120,10 +120,11 @@ async function init() {
                     if (err) throw err;
                 });
             });
-        }
 
-        // console.log(myEmployees);
-        // console.log(devTeam);
+            fs.writeFile (outputPath, info, (err) => {
+                if (err) throw err;
+            })
+        }
 
         // const html = render(answers);
         // await writeFileAsync("index.html", html);
