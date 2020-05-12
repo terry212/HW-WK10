@@ -110,25 +110,21 @@ async function init() {
             }
         });
         // create the directory if it does exist or not
-        function writeFile(info) {
+        function generateTeam(info) {
             fs.access(OUTPUT_DIR, fs.constants.F_OK, (err) => {
                 console.log(`
                 ${OUTPUT_DIR} ${err ? 'does not exist' : 'exists'}
                 The directory will be created for you shortly!
                 `);
-                fs.mkdir(OUTPUT_DIR, { recursive: true }, (err) => {
-                    if (err) throw err;
-                });
             });
-
-            fs.writeFile (outputPath, info, (err) => {
+            fs.mkdir(OUTPUT_DIR, { recursive: true }, (err) => {
+                if (err) throw err;
+            });
+            fs.writeFile(outputPath, info, (err) => {
                 if (err) throw err;
             })
         }
 
-        // const html = render(answers);
-        // await writeFileAsync("index.html", html);
-        // console.log("Successfully wrote to index.html");
     } catch (err) {
         console.log(err);
     }
