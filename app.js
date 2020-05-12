@@ -98,12 +98,21 @@ async function init() {
         const myEmployees = [];
         const answers = await devTeamPrompt();
         myEmployees.push(answers);
-
-
+        // analyze gathered data to create proper class, cases are based on list options
+        const devTeam = myEmployees.map(function (teamEmployee) {
+            switch (teamEmployee.role) {
+                case "Manager":
+                    return new Manager(teamEmployee.name, teamEmployee.id, teamEmployee.email, teamEmployee.officeNumber);
+                case "Engineer":
+                    return new Engineer(teamEmployee.name, teamEmployee.id, teamEmployee.email, teamEmployee.github);
+                case "Intern":
+                    return new Intern(teamEmployee.name, teamEmployee.id, teamEmployee.email, teamEmployee.school);
+            }
+        return devTeam;
+        });
 
         console.log(myEmployees);
         console.log(devTeam);
-
 
         // const html = render(answers);
         // await writeFileAsync("index.html", html);
