@@ -22,8 +22,8 @@ const render = require("./lib/htmlRenderer");
             message: "What is the name of the Employee?",
             type: "input",
             name: "name",
-            validate: function validateName(name) {
-                return name !== '' || "Employee name should not be blank!";
+            validate: function validateName(eName) {
+                return eName !== '' || "Employee name should not be blank!";
             }
         },
         {
@@ -66,8 +66,8 @@ const render = require("./lib/htmlRenderer");
             message: "What is the Engineer Github username?",
             type: "input",
             name: "github",
-            validate: function validateName(name) {
-                return name !== '';
+            validate: function validateName(githubName) {
+                return githubName !== '' || `Employee's Github username should not be blank!`;
             }
         },
         {
@@ -75,8 +75,8 @@ const render = require("./lib/htmlRenderer");
             message: "What is the name of the school the Intern attends?",
             type: "input",
             name: "school",
-            validate: function validateName(name) {
-                return name !== '';
+            validate: function validateName(schoolName) {
+                return schoolName !== '' || `Employee's school name should not be blank!`;
             }
         }
     ]);
