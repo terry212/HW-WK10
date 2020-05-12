@@ -10,6 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const repeat = true;
 
 //Validation Code
 
@@ -78,6 +79,11 @@ function devTeamPrompt() {
             validate: function validateName(schoolName) {
                 return schoolName !== '' || `Employee's school name should not be blank!`;
             }
+        },
+        {
+            message: "Would you like to add another member?",
+            type: "confirm",
+            name: "addMember"
         }
     ]);
 }
