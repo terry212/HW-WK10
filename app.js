@@ -94,7 +94,7 @@ async function init() {
     
     `);
     try {
-        // start with blank array of employees and gather info about the employee
+        // start with blank array of employees and gather info about the employees
         const myEmployees = [];
         const answers = await devTeamPrompt();
         myEmployees.push(answers);
@@ -108,11 +108,22 @@ async function init() {
                 case "Intern":
                     return new Intern(teamEmployee.name, teamEmployee.id, teamEmployee.email, teamEmployee.school);
             }
-        return devTeam;
         });
+        // create the directory if it does exist or not
+        function writeFile(info) {
+            fs.access(OUTPUT_DIR, fs.constants.F_OK, (err) => {
+                console.log(`
+                ${OUTPUT_DIR} ${err ? 'does not exist' : 'exists'}
+                The directory will be created for you shortly!
+                `);
+                fs.mkdir(OUTPUT_DIR, { recursive: true }, (err) => {
+                    if (err) throw err;
+                });
+            });
+        }
 
-        console.log(myEmployees);
-        console.log(devTeam);
+        // console.log(myEmployees);
+        // console.log(devTeam);
 
         // const html = render(answers);
         // await writeFileAsync("index.html", html);
