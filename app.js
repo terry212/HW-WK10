@@ -16,7 +16,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-// function devTeamPrompt() {
+function devTeamPrompt() {
     return inquirer.prompt([
         {
             message: "What is the name of the Employee?",
@@ -52,7 +52,7 @@ const render = require("./lib/htmlRenderer");
             default: 0
         },
         {
-            when: function (answers) {if (answers.role === "Manager") return true;},
+            when: function (answers) { if (answers.role === "Manager") return true; },
             message: "What is the office number of the Manager?",
             type: "input",
             name: "officeNumber",
@@ -62,7 +62,7 @@ const render = require("./lib/htmlRenderer");
             }
         },
         {
-            when: function (answers) {if (answers.role === "Engineer") return true;},
+            when: function (answers) { if (answers.role === "Engineer") return true; },
             message: "What is the Engineer Github username?",
             type: "input",
             name: "github",
@@ -71,7 +71,7 @@ const render = require("./lib/htmlRenderer");
             }
         },
         {
-            when: function (answers) {if (answers.role === "Intern") return true;},
+            when: function (answers) { if (answers.role === "Intern") return true; },
             message: "What is the name of the school the Intern attends?",
             type: "input",
             name: "school",
@@ -80,7 +80,40 @@ const render = require("./lib/htmlRenderer");
             }
         }
     ]);
-// }
+}
+
+async function init() {
+    console.log(`
+    ********************************************************************************************************
+        Welcome to the "Team Generator", helping you create a webpage with your team's basic informaiton
+    ********************************************************************************************************
+
+    Provide details of each team member one at a time.
+
+    Let's get started!
+    
+    `);
+    try {
+        // start with blank array of employees and gather info about the employee
+        const myEmployees = [];
+        const answers = await devTeamPrompt();
+        myEmployees.push(answers);
+
+
+
+        console.log(myEmployees);
+        console.log(devTeam);
+
+
+        // const html = render(answers);
+        // await writeFileAsync("index.html", html);
+        // console.log("Successfully wrote to index.html");
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+init();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
