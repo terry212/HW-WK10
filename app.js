@@ -10,7 +10,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-var repeat = true;
 
 //Validation Code
 
@@ -103,11 +102,10 @@ async function init() {
         // start with blank array of employees and gather info about the employees
         const myEmployees = [];
         // restart prompt until user does not want to add members
-        while (repeat === true) {
-            const answers = await devTeamPrompt();
+        do {
+            var answers = await devTeamPrompt();
             myEmployees.push(answers);
-            if (answers.addMember === false) {repeat = false;}
-        }
+        } while (answers.addMember);
         // analyze gathered data to create proper class, cases are based on list options
         const devTeam = myEmployees.map(function (teamEmployee) {
             switch (teamEmployee.role) {
