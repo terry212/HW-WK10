@@ -122,9 +122,11 @@ async function init() {
             });
             fs.writeFile(outputPath, info, (err) => {
                 if (err) throw err;
-            })
+            });
         }
-
+        // render the dev team and write it to the proper path
+        const html = await render(devTeam);
+        generateTeam(html);
     } catch (err) {
         console.log(err);
     }
