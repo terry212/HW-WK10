@@ -4,7 +4,6 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-const Joi = require("@hapi/joi");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -20,7 +19,7 @@ function devTeamPrompt() {
             message: "What is the name of the Employee?",
             type: "input",
             name: "name",
-            validate: function validateName(eName) {
+            validate: (eName) => {
                 return eName !== '' || "Employee name should not be blank!";
             }
         },
@@ -28,7 +27,7 @@ function devTeamPrompt() {
             message: "What is the ID of the Employee?",
             type: "input",
             name: "id",
-            validate: function validateID(id) {
+            validate: (id) => {
                 var reg = /^\d+$/;
                 return reg.test(id) || "Employee ID should be a number!";
             }
@@ -54,7 +53,7 @@ function devTeamPrompt() {
             message: "What is the office number of the Manager?",
             type: "input",
             name: "officeNumber",
-            validate: function validateID(officeNumber) {
+            validate: (officeNumber) => {
                 var reg = /^\d+$/;
                 return reg.test(officeNumber) || "Office number should be a number!";
             }
@@ -64,7 +63,7 @@ function devTeamPrompt() {
             message: "What is the Engineer Github username?",
             type: "input",
             name: "github",
-            validate: function validateName(githubName) {
+            validate: (githubName) => {
                 return githubName !== '' || `Employee's Github username should not be blank!`;
             }
         },
@@ -73,7 +72,7 @@ function devTeamPrompt() {
             message: "What is the name of the school the Intern attends?",
             type: "input",
             name: "school",
-            validate: function validateName(schoolName) {
+            validate: (schoolName) => {
                 return schoolName !== '' || `Employee's school name should not be blank!`;
             }
         },
@@ -105,7 +104,7 @@ async function init() {
             myEmployees.push(answers);
         } while (answers.addMember);
         // analyze gathered data to create proper class, cases are based on list options
-        const devTeam = myEmployees.map(function (teamEmployee) {
+        const devTeam = myEmployees.map((teamEmployee) => {
             switch (teamEmployee.role) {
                 case "Manager":
                     return new Manager(teamEmployee.name, teamEmployee.id, teamEmployee.email, teamEmployee.officeNumber);
@@ -118,10 +117,7 @@ async function init() {
         // create the directory if it does exist or not
         function generateTeam(info) {
             fs.access(OUTPUT_DIR, fs.constants.F_OK, (err) => {
-                console.log(`
-                ${OUTPUT_DIR} ${err ? 'does not exist' : 'exists'}
-                The directory will be created for you shortly!
-                `);
+                console.log(`${OUTPUT_DIR} ${err ? 'does not exist \n The directory will be created for you shortly!' : 'exists'}`);
             });
             fs.mkdir(OUTPUT_DIR, { recursive: true }, (err) => {
                 if (err) throw err;
